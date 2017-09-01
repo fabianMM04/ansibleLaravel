@@ -1,0 +1,10 @@
+---
+- name: Deploy Laravel app with ufw, git,php, composer, mysql, Nginx
+  hosts: webservers
+  roles:
+     #- ufw   
+     #- git  
+     - php
+     - composer
+     - mysql
+     

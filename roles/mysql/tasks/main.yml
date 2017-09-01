@@ -1,0 +1,50 @@
+---
+
+- name: install mysql 
+  become: yes
+  apt: pkg={{item}} state=present 
+  with_items:
+    - mysql-server
+    
+
+
+- name: Start the MySQL service
+  service: name=mysql state=started enabled=true
+
+
+- name: Create database user 
+  mysql_user:
+    name: '{{ db_user }}'
+    password: '{{ db_pass }}'
+    priv: '*.*:ALL'
+    state: present
+  register: result
+  ignore_errors: True
+
+- name: Create database user 
+  mysql_user:
+    name: '{{ db_user }}'
+    password: '{{ db_pass }}'
+    priv: '*.*:ALL'
+    state: present
+  when: result|succeeded  
+
+- name: login database user 
+  mysql_user:
+    login_user: '{{ db_user }}'
+    login_password: '{{ db_pass }}'
+    name: '{{ db_user }}'
+    password: '{{ db_pass }}'
+    priv: '*.*:ALL'
+    state: present
+  when: result|failed
+    
+
+- name: Create a new database with name 'HtCondor'
+  mysql_db:
+    login_user: '{{ db_user }}'
+    login_password: '{{ db_pass }}'
+    name: '{{ name_db }}'
+    state: present
+  
+

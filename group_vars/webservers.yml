@@ -1,0 +1,4 @@
+ansible_user: ubuntu 
+ansible_ssh_private_key_file: /home/inferiore/Descargas/hpclab_key.txt
+server_hostname: 192.34.78.93
+

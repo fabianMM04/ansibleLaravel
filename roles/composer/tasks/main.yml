@@ -1,0 +1,7 @@
+---
+
+- name: install Composer  
+  become: yes
+  apt: pkg={{item}} state=present 
+  with_items:
+    - composer

@@ -1,0 +1,40 @@
+---
+- name: enabled ufw
+  become: yes
+  ufw:
+    state: enabled
+
+- name: allow ssh access
+  become: yes
+  ufw:
+    rule: allow
+    port: 22
+    proto: tcp  
+
+- name: allow all access to port 3306
+  become: yes
+  ufw:
+    rule: allow
+    port: 3306
+    proto: tcp 
+
+- name: allow all access to port 80
+  become: yes
+  ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+
+- name: deny all access to port 8000
+  become: yes
+  ufw:
+    rule: deny
+    port: 8000
+    proto: tcp
+
+- name: Rate-limiting ssh connections 
+  become: yes
+  ufw:
+    rule: limit
+    port: ssh
+    proto: tcp
