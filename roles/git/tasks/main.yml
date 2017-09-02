@@ -5,3 +5,9 @@
 - name: Clone project repo
   become: yes
   git: repo={{repo}} dest={{ install_root }} force=yes
+
+- name: Copiar .env al proyecto de laravel
+  become: yes
+  template: 
+    src: .env 
+    dest: /var/www/ApiHtCondor/.env

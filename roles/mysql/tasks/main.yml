@@ -5,6 +5,7 @@
   apt: pkg={{item}} state=present 
   with_items:
     - mysql-server
+    - python-mysqldb
     
 
 
@@ -13,6 +14,7 @@
 
 
 - name: Create database user 
+  become: yes
   mysql_user:
     name: '{{ db_user }}'
     password: '{{ db_pass }}'
@@ -22,6 +24,7 @@
   ignore_errors: True
 
 - name: Create database user 
+  become: yes
   mysql_user:
     name: '{{ db_user }}'
     password: '{{ db_pass }}'
@@ -30,6 +33,7 @@
   when: result|succeeded  
 
 - name: login database user 
+  become: yes
   mysql_user:
     login_user: '{{ db_user }}'
     login_password: '{{ db_pass }}'
@@ -41,6 +45,7 @@
     
 
 - name: Create a new database with name 'HtCondor'
+  become: yes
   mysql_db:
     login_user: '{{ db_user }}'
     login_password: '{{ db_pass }}'

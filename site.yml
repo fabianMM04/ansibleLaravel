@@ -3,8 +3,8 @@
   hosts: webservers
   roles:
      #- ufw   
-     #- git  
-     - php
-     - composer
-     - mysql
+     - git  
+     #- php
+     #- composer
+     #- mysql
      

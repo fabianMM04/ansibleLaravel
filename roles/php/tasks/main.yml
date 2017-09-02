@@ -1,12 +1,22 @@
 ---
 
+- name: install PPA  
+  become: yes
+  apt_repository: repo={{item}} state=present 
+  with_items:
+    
+    - ppa:ondrej/php
+
+
 - name: install PHP  
   become: yes
   apt: pkg={{item}} state=present 
   with_items:
+
+    - software-properties-common
     - php5.6
     - php5.6-mbstring 
     - php5.6-mcrypt 
     - php5.6-mysql 
     - php5.6-xml
-    - php56-php-ldap
+    - php5.6-ldap
